@@ -25,7 +25,7 @@ AutoTrans2WordNotebook/
 适合普通用户。下载 Release 附件或本地构建后，直接运行：
 
 ```text
-dist/AutoTrans2WordNotebook.exe
+dist/自动选词记录单词本.exe
 ```
 
 首次启动时，在设置窗口中选择 Word 单词本 `.docx` 路径。支持续写覆盖原有doc。
@@ -89,7 +89,7 @@ python tools/build_ecdict.py
 输出文件：
 
 ```text
-dist/AutoTrans2WordNotebook.exe
+dist/离线选词单词本.exe
 ```
 
 ## 项目结构
@@ -97,6 +97,7 @@ dist/AutoTrans2WordNotebook.exe
 ```text
 AutoTrans2WordNotebook/
 ├── app.py                         # Python app 启动入口
+├── assets/                        # 应用图标等静态资源
 ├── pyproject.toml                 # 项目依赖和工具配置
 ├── packaging/                     # PyInstaller 打包配置
 ├── scripts/                       # 构建脚本

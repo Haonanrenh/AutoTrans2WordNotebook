@@ -15,4 +15,4 @@ if ($LASTEXITCODE -ne 0) {
     throw "PyInstaller failed with exit code $LASTEXITCODE"
 }
 
-Write-Host "Build finished: dist/AutoTrans2WordNotebook.exe"
+Write-Host "Build finished: dist/自动选词记录单词本.exe"

@@ -66,9 +66,18 @@ class SettingsWindow(QWidget):
         return container
 
     def _pick_notebook(self) -> None:
-        path, _ = QFileDialog.getSaveFileName(self, "选择 Word 单词本", "", "Word 文档 (*.docx)")
+        path, _ = QFileDialog.getSaveFileName(
+            self,
+            "选择 Word 单词本",
+            "",
+            "Word 文档 (*.docx)",
+            options=QFileDialog.Option.DontConfirmOverwrite,
+        )
         if path:
-            self.notebook_input.setText(path)
+            notebook_path = Path(path)
+            if not notebook_path.suffix:
+                notebook_path = notebook_path.with_suffix(".docx")
+            self.notebook_input.setText(str(notebook_path))
 
     def _save(self) -> None:
         config = AppConfig(

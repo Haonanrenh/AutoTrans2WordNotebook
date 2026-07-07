@@ -1,6 +1,7 @@
 from __future__ import annotations
 
-from PySide6.QtCore import Signal
+from PySide6.QtCore import QPoint, Qt, Signal
+from PySide6.QtGui import QCursor, QGuiApplication
 from PySide6.QtWidgets import (
     QDialog,
     QDialogButtonBox,
@@ -20,6 +21,7 @@ class ResultPopup(QDialog):
     def __init__(self) -> None:
         super().__init__()
         self.setWindowTitle("离线翻译结果")
+        self.setWindowFlag(Qt.WindowType.WindowStaysOnTopHint, True)
         self.setMinimumSize(520, 360)
         self.setStyleSheet(APP_STYLE)
         self._result: LookupResult | None = None
@@ -58,6 +60,8 @@ class ResultPopup(QDialog):
         self.phonetic_label.setText(f"美式音标：{result.display_phonetic}")
         self.translation_text.setPlainText(result.display_translation)
         self.save_button.setEnabled(result.found)
+        self.adjustSize()
+        self.move(self._bounded_position(QCursor.pos()))
         self.show()
         self.raise_()
         self.activateWindow()
@@ -65,3 +69,24 @@ class ResultPopup(QDialog):
     def _emit_save(self) -> None:
         if self._result is not None:
             self.save_requested.emit(self._result)
+
+    def _bounded_position(self, cursor_position: QPoint) -> QPoint:
+        margin = 20
+        screen = QGuiApplication.screenAt(cursor_position) or QGuiApplication.primaryScreen()
+        if screen is None:
+            return QPoint(cursor_position.x() + margin, cursor_position.y() + margin)
+
+        area = screen.availableGeometry()
+        width = max(self.sizeHint().width(), self.minimumWidth())
+        height = max(self.sizeHint().height(), self.minimumHeight())
+        target_x = cursor_position.x() + margin
+        target_y = cursor_position.y() + margin
+
+        if target_x + width > area.right():
+            target_x = area.right() - width - margin
+        if target_y + height > area.bottom():
+            target_y = area.bottom() - height - margin
+
+        target_x = min(max(target_x, area.left() + margin), area.right() - width - margin)
+        target_y = min(max(target_y, area.top() + margin), area.bottom() - height - margin)
+        return QPoint(target_x, target_y)
