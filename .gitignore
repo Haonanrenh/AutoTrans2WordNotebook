@@ -11,6 +11,7 @@ __pycache__/
 build/
 develop-eggs/
 dist/
+dist_*/
 downloads/
 eggs/
 .eggs/
@@ -31,6 +32,7 @@ MANIFEST
 #   before PyInstaller builds the exe, so as to inject date/other infos into it.
 *.manifest
 *.spec
+!packaging/*.spec
 
 # Installer logs
 pip-log.txt
@@ -49,6 +51,7 @@ coverage.xml
 *.py.cover
 .hypothesis/
 .pytest_cache/
+pytest-cache-files-*/
 cover/
 
 # Translations
@@ -188,12 +191,6 @@ cython_debug/
 #   option (not recommended) you can uncomment the following to ignore the entire idea folder.
 # .idea/
 
-# Abstra
-#   Abstra is an AI-powered process automation framework.
-#   Ignore directories containing user credentials, local state, and settings.
-#   Learn more at https://abstra.io/docs
-.abstra/
-
 # Visual Studio Code
 #   Visual Studio Code specific template is maintained in a separate VisualStudioCode.gitignore 
 #   that can be found at https://github.com/github/gitignore/blob/main/Global/VisualStudioCode.gitignore
@@ -216,3 +213,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Project generated files
+src/resources/ecdict*.csv
+src/resources/builtin_dictionary.csv
