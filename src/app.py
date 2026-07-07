@@ -41,7 +41,6 @@ class AppController(QObject):
         self.mouse_selection: GlobalMouseSelection | None = None
         self._mouse_busy = False
         self._last_mouse_at = 0.0
-        self._last_detected_text = ""
 
         self.result_popup = ResultPopup()
         self.result_popup.save_requested.connect(self.save_result)
@@ -102,9 +101,6 @@ class AppController(QObject):
 
         if not is_probably_english_selection(selected_text):
             return
-        if selected_text == self._last_detected_text:
-            return
-        self._last_detected_text = selected_text
         self.signals.selection_detected.emit(selected_text)
 
     def lookup_text(self, text: str) -> None:
