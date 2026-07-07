@@ -1,5 +1,5 @@
 # AutoTrans2WordNotebook
-
+A Windows desktop app for offline English-Chinese word lookup and vocabulary collection into Word docx notebooks.
 Windows 离线选词翻译记录学习工具，可将查询结果保存到本地 Word 单词本。
 
 程序常驻系统托盘。用户用鼠标选中英文单词或短语后，点击浮动提示即可查看中文释义和音标，并可一键保存到 `.docx` 单词本。
